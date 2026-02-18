@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwRIvKg9gwhuH5RXxp3LrGq5OeSiJTeDcDoT3OnGRTKaJIOgboa2XOujDnD2VUUBYbC/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwWdlDH9NUfkk8PIbiIsEDZ-grlQCXBJi7i5adMqbzHSCuufG8MXQhIvuaCMX_CzVI/exec";
 
 // =====================
 // SHOW FORM
@@ -61,12 +61,16 @@ function resetForm(prefix) {
 }
 
 // =====================
+// LOAD DATA
+// =====================
 function loadData(type) {
   fetch(`${API_URL}?type=${type}`)
     .then(res => res.json())
     .then(renderTable);
 }
 
+// =====================
+// FILE TO BASE64
 // =====================
 function toBase64(file) {
   return new Promise((resolve, reject) => {
@@ -138,6 +142,8 @@ async function submitSuratKeluar(event) {
 }
 
 // =====================
+// SUBMIT DATA
+// =====================
 function submitData(type, payload, callback) {
   fetch(API_URL, {
     method: "POST",
@@ -151,6 +157,29 @@ function submitData(type, payload, callback) {
 }
 
 // =====================
+// DELETE DATA
+// =====================
+function deleteRow(type, id) {
+  if (!confirm("Yakin ingin menghapus data ini?")) return;
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "delete",
+      type: type,
+      id: id
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      renderTable(data);
+      showToast("Data berhasil dihapus");
+    });
+}
+
+// =====================
+// RENDER TABLE
+// =====================
 function renderTable(data) {
   const table = document.getElementById("table");
   table.innerHTML = "";
@@ -159,11 +188,29 @@ function renderTable(data) {
 
   const headers = Object.keys(data[0]);
 
-  table.innerHTML += `<tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>`;
+  table.innerHTML += `
+    <tr>
+      ${headers.map(h => `<th>${h}</th>`).join("")}
+      <th>Aksi</th>
+    </tr>
+  `;
+
+  const currentType =
+    document.getElementById("btnMasuk").classList.contains("active")
+      ? "surat_masuk"
+      : "surat_keluar";
 
   data.forEach(row => {
     table.innerHTML += `
-      <tr>${headers.map(h => `<td>${row[h] || ""}</td>`).join("")}</tr>
+      <tr>
+        ${headers.map(h => `<td>${row[h] || ""}</td>`).join("")}
+        <td>
+          <button onclick="deleteRow('${currentType}','${row.id}')"
+            style="background:#dc2626;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;">
+            Hapus
+          </button>
+        </td>
+      </tr>
     `;
   });
 }
