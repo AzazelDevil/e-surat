@@ -1,113 +1,103 @@
-/* =====================
+/* ======================
    GLOBAL
-===================== */
+====================== */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f5f7fb;
   color: #2c3e50;
 }
 
-/* =====================
+/* ======================
    HEADER
-===================== */
+====================== */
 header {
-  background: #2c3e50;
-  color: white;
-  padding: 16px;
+  background: white;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 header h1 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
 }
 
-/* =====================
-   NAVIGATION
-===================== */
-nav {
-  background: #ecf0f1;
-  padding: 10px;
-  border-bottom: 1px solid #dcdfe3;
-}
-
-nav button {
-  padding: 8px 12px;
-  margin-right: 6px;
-  border: none;
-  background: #34495e;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-nav button:hover {
-  background: #2c3e50;
-}
-
-/* =====================
-   FORM BOX
-===================== */
-.form-box {
-  background: white;
-  margin: 15px;
+/* ======================
+   TABS
+====================== */
+.tabs {
+  display: flex;
+  gap: 10px;
   padding: 15px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-.form-box h3 {
+.tabs button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #e3e8ef;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.tabs button.active {
+  background: #2563eb;
+  color: white;
+}
+
+.tabs button:hover {
+  transform: translateY(-1px);
+}
+
+/* ======================
+   FORM CARD
+====================== */
+.form-card {
+  background: white;
+  margin: 0 15px 15px;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.form-card h3 {
   margin-top: 0;
   margin-bottom: 12px;
-  font-size: 16px;
-  color: #34495e;
 }
 
-/* INPUT */
-.form-box input,
-.form-box textarea {
+.form-card input,
+.form-card textarea {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #d5dbe3;
+  border-radius: 8px;
   box-sizing: border-box;
-  border: 1px solid #ccd1d6;
-  border-radius: 4px;
   font-size: 14px;
-  background: #fff;
 }
 
-.form-box input:focus,
-.form-box textarea:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
-/* TEXTAREA */
-.form-box textarea {
-  min-height: 70px;
+.form-card textarea {
+  min-height: 80px;
   resize: vertical;
 }
 
-/* BUTTON */
-.form-box button {
+.form-card button {
   padding: 10px 16px;
   border: none;
-  background: #27ae60;
+  background: #16a34a;
   color: white;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
 }
 
-.form-box button:hover {
-  background: #219150;
+.form-card button:hover {
+  background: #15803d;
 }
 
-/* =====================
-   TABLE AREA
-===================== */
+/* ======================
+   TABLE
+====================== */
 main {
   margin: 15px;
 }
@@ -116,42 +106,38 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
 }
 
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
   font-size: 14px;
 }
 
 th {
-  background: #ecf0f1;
-  color: #2c3e50;
-  font-weight: 600;
+  background: #f1f5f9;
+  text-align: left;
 }
 
-/* ROW HOVER */
-tr:hover td {
-  background: #f9fafb;
+/* ======================
+   UTILITIES
+====================== */
+.hidden {
+  display: none;
 }
 
-/* =====================
+/* ======================
    RESPONSIVE
-===================== */
+====================== */
 @media (max-width: 768px) {
-  nav button {
-    margin-bottom: 6px;
-  }
-
-  .form-box {
-    margin: 10px;
+  .tabs {
+    flex-wrap: wrap;
   }
 
   main {
-    margin: 10px;
     overflow-x: auto;
   }
 
