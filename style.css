@@ -1,9 +1,16 @@
+/* =====================
+   GLOBAL
+===================== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f4f6f8;
+  color: #2c3e50;
 }
 
+/* =====================
+   HEADER
+===================== */
 header {
   background: #2c3e50;
   color: white;
@@ -13,11 +20,16 @@ header {
 header h1 {
   margin: 0;
   font-size: 20px;
+  font-weight: 600;
 }
 
+/* =====================
+   NAVIGATION
+===================== */
 nav {
   background: #ecf0f1;
   padding: 10px;
+  border-bottom: 1px solid #dcdfe3;
 }
 
 nav button {
@@ -27,40 +39,75 @@ nav button {
   background: #34495e;
   color: white;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
 nav button:hover {
   background: #2c3e50;
 }
 
-#form {
+/* =====================
+   FORM BOX
+===================== */
+.form-box {
   background: white;
   margin: 15px;
   padding: 15px;
   border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-#form input,
-#form select,
-#form textarea {
+.form-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #34495e;
+}
+
+/* INPUT */
+.form-box input,
+.form-box textarea {
   width: 100%;
-  margin-bottom: 8px;
   padding: 8px;
+  margin-bottom: 8px;
   box-sizing: border-box;
+  border: 1px solid #ccd1d6;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
 }
 
-#form button {
+.form-box input:focus,
+.form-box textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* TEXTAREA */
+.form-box textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+/* BUTTON */
+.form-box button {
   padding: 10px 16px;
   border: none;
   background: #27ae60;
   color: white;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-#form button:hover {
+.form-box button:hover {
   background: #219150;
 }
 
+/* =====================
+   TABLE AREA
+===================== */
 main {
   margin: 15px;
 }
@@ -69,14 +116,46 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-th, td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  font-size: 14px;
 }
 
 th {
   background: #ecf0f1;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* ROW HOVER */
+tr:hover td {
+  background: #f9fafb;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+  nav button {
+    margin-bottom: 6px;
+  }
+
+  .form-box {
+    margin: 10px;
+  }
+
+  main {
+    margin: 10px;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 700px;
+  }
 }
