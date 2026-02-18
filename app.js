@@ -1,6 +1,6 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbyi1RJ0OkBorU09DGiDextAu1Si93VDxbMYvzUY6ktGgdfrK4LpH61ZBfzhC2knkHMg/exec";
 
-// LOAD DATA AWAL
+// LOAD AWAL
 window.onload = function () {
   loadData("surat_masuk");
 };
@@ -37,7 +37,6 @@ function submitData() {
   })
     .then(res => res.json())
     .then(fullData => {
-      // setelah perubahan → render ulang SEMUA data
       renderTable(fullData);
     });
 }
