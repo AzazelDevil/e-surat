@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyi1RJ0OkBorU09DGiDextAu1Si93VDxbMYvzUY6ktGgdfrK4LpH61ZBfzhC2knkHMg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwRIvKg9gwhuH5RXxp3LrGq5OeSiJTeDcDoT3OnGRTKaJIOgboa2XOujDnD2VUUBYbC/exec";
 
 // LOAD AWAL
 window.onload = () => loadData("surat_masuk");
