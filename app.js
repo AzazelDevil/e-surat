@@ -1,88 +1,86 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbyi1RJ0OkBorU09DGiDextAu1Si93VDxbMYvzUY6ktGgdfrK4LpH61ZBfzhC2knkHMg/exec";
 
+// LOAD AWAL
 window.onload = () => loadData("surat_masuk");
 
-// ===================
-// LOAD DATA
-// ===================
 function loadData(type) {
   fetch(`${API_URL}?type=${type}`)
     .then(res => res.json())
     .then(renderTable);
 }
 
-// ===================
-// CONVERT FILE → BASE64
-// ===================
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = reject;
   });
 }
 
-// ===================
-// SUBMIT DATA
-// ===================
-async function submitData() {
-  const type = document.getElementById("type").value;
-  const fileInput = document.getElementById("file_upload");
-  const file = fileInput.files[0];
-
-  let fileData = null;
-
-  if (file) {
-    fileData = await toBase64(file);
-  }
+// =======================
+// SURAT MASUK
+// =======================
+async function submitSuratMasuk() {
+  const file = document.getElementById("masuk_file").files[0];
+  let fileData = file ? await toBase64(file) : null;
 
   const payload = {
     id: Date.now(),
-    nomor: document.getElementById("nomor").value,
-    tanggal: document.getElementById("tanggal").value,
-    perihal: document.getElementById("perihal").value,
-    catatan: document.getElementById("catatan").value,
+    nomor: document.getElementById("masuk_nomor").value,
+    tanggal: document.getElementById("masuk_tanggal").value,
+    pengirim: document.getElementById("masuk_pengirim").value,
+    perihal: document.getElementById("masuk_perihal").value,
+    catatan: document.getElementById("masuk_catatan").value,
     fileName: file ? file.name : "",
     fileData: fileData
   };
 
-  if (type === "surat_masuk") {
-    payload.pengirim = document.getElementById("pihak").value;
-  } else {
-    payload.tujuan = document.getElementById("pihak").value;
-  }
+  submitData("surat_masuk", payload);
+}
 
+// =======================
+// SURAT KELUAR
+// =======================
+async function submitSuratKeluar() {
+  const file = document.getElementById("keluar_file").files[0];
+  let fileData = file ? await toBase64(file) : null;
+
+  const payload = {
+    id: Date.now(),
+    nomor: document.getElementById("keluar_nomor").value,
+    tanggal: document.getElementById("keluar_tanggal").value,
+    tujuan: document.getElementById("keluar_tujuan").value,
+    perihal: document.getElementById("keluar_perihal").value,
+    catatan: document.getElementById("keluar_catatan").value,
+    fileName: file ? file.name : "",
+    fileData: fileData
+  };
+
+  submitData("surat_keluar", payload);
+}
+
+// =======================
+function submitData(type, payload) {
   fetch(API_URL, {
     method: "POST",
     body: JSON.stringify({ type, payload })
   })
     .then(res => res.json())
-    .then(fullData => {
-      renderTable(fullData);
-    });
+    .then(renderTable);
 }
 
-// ===================
-// RENDER TABLE
-// ===================
 function renderTable(data) {
   const table = document.getElementById("table");
   table.innerHTML = "";
 
-  if (!data || data.length === 0) {
-    table.innerHTML = "<tr><td>Data kosong</td></tr>";
-    return;
-  }
+  if (!data.length) return;
 
   const headers = Object.keys(data[0]);
 
   table.innerHTML += `<tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr>`;
 
   data.forEach(row => {
-    table.innerHTML += `
-      <tr>${headers.map(h => `<td>${row[h] || ""}</td>`).join("")}</tr>
-    `;
+    table.innerHTML += `<tr>${headers.map(h => `<td>${row[h] || ""}</td>`).join("")}</tr>`;
   });
 }
