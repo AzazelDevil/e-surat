@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-Surat</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>E-Surat</h1>
+</header>
+
+<nav>
+  <button onclick="loadData('surat_masuk')">Surat Masuk</button>
+  <button onclick="loadData('surat_keluar')">Surat Keluar</button>
+</nav>
+
+<section id="form">
+  <h3>Input Surat</h3>
+
+  <select id="type">
+    <option value="surat_masuk">Surat Masuk</option>
+    <option value="surat_keluar">Surat Keluar</option>
+  </select>
+
+  <input id="nomor" placeholder="Nomor Surat (isi manual)">
+  <input id="tanggal" type="date">
+  <input id="pihak" placeholder="Pengirim / Tujuan">
+  <input id="perihal" placeholder="Perihal">
+  <input id="file" placeholder="Link File Google Drive">
+  <textarea id="catatan" placeholder="Catatan"></textarea>
+
+  <button onclick="submitData()">Simpan</button>
+</section>
+
+<main>
+  <table id="table"></table>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
