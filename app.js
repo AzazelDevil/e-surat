@@ -82,6 +82,21 @@ function toBase64(file) {
 }
 
 // =====================
+// GENERATE SIMPLE ID
+// =====================
+function generateId(prefix) {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "";
+
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return `${prefix}-${result}`;
+}
+
+
+// =====================
 // SUBMIT SURAT MASUK
 // =====================
 async function submitSuratMasuk(event) {
@@ -93,7 +108,7 @@ async function submitSuratMasuk(event) {
   const fileData = file ? await toBase64(file) : null;
 
   const payload = {
-    id: Date.now(),
+    id: generateId("SM"),
     nomor: document.getElementById("masuk_nomor").value,
     tanggal: document.getElementById("masuk_tanggal").value,
     pengirim: document.getElementById("masuk_pengirim").value,
@@ -123,7 +138,7 @@ async function submitSuratKeluar(event) {
   const fileData = file ? await toBase64(file) : null;
 
   const payload = {
-    id: Date.now(),
+    id: generateId("SK"),
     nomor: document.getElementById("keluar_nomor").value,
     tanggal: document.getElementById("keluar_tanggal").value,
     tujuan: document.getElementById("keluar_tujuan").value,
