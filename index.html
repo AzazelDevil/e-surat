@@ -22,6 +22,11 @@
   </button>
 </nav>
 
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast hidden">
+  ✔ Data berhasil terkirim
+</div>
+
 <!-- FORM SURAT MASUK -->
 <section id="formMasuk" class="form-card hidden">
   <h3>Input Surat Masuk</h3>
@@ -33,7 +38,9 @@
   <input id="masuk_file" type="file">
   <textarea id="masuk_catatan" placeholder="Catatan"></textarea>
 
-  <button onclick="submitSuratMasuk()">Simpan Surat Masuk</button>
+  <button onclick="submitSuratMasuk(event)">
+    Simpan Surat Masuk
+  </button>
 </section>
 
 <!-- FORM SURAT KELUAR -->
@@ -47,7 +54,9 @@
   <input id="keluar_file" type="file">
   <textarea id="keluar_catatan" placeholder="Catatan"></textarea>
 
-  <button onclick="submitSuratKeluar()">Simpan Surat Keluar</button>
+  <button onclick="submitSuratKeluar(event)">
+    Simpan Surat Keluar
+  </button>
 </section>
 
 <main>
