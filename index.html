@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>E-Surat</title>
+  <title>E-Surat Modern</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,15 +12,18 @@
   <h1>E-Surat</h1>
 </header>
 
-<nav>
-  <button onclick="loadData('surat_masuk')">Data Surat Masuk</button>
-  <button onclick="loadData('surat_keluar')">Data Surat Keluar</button>
+<!-- NAVIGATION -->
+<nav class="tabs">
+  <button id="btnMasuk" onclick="showForm('masuk')">
+    Surat Masuk
+  </button>
+  <button id="btnKeluar" onclick="showForm('keluar')">
+    Surat Keluar
+  </button>
 </nav>
 
-<!-- ===================== -->
 <!-- FORM SURAT MASUK -->
-<!-- ===================== -->
-<section class="form-box">
+<section id="formMasuk" class="form-card hidden">
   <h3>Input Surat Masuk</h3>
 
   <input id="masuk_nomor" placeholder="Nomor Surat">
@@ -33,10 +36,8 @@
   <button onclick="submitSuratMasuk()">Simpan Surat Masuk</button>
 </section>
 
-<!-- ===================== -->
 <!-- FORM SURAT KELUAR -->
-<!-- ===================== -->
-<section class="form-box">
+<section id="formKeluar" class="form-card hidden">
   <h3>Input Surat Keluar</h3>
 
   <input id="keluar_nomor" placeholder="Nomor Surat">
