@@ -1,21 +1,15 @@
-/* =========================
-   ROOT COLORS
-========================= */
 :root {
   --bg: #f4f7fc;
   --surface: #ffffff;
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
-  --secondary: #64748b;
   --success: #16a34a;
   --text: #1e293b;
   --border: #e2e8f0;
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* =========================
-   GLOBAL
-========================= */
+/* GLOBAL */
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
@@ -23,207 +17,112 @@ body {
   color: var(--text);
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 header {
   background: linear-gradient(120deg, var(--primary), var(--primary-dark));
   color: white;
-  padding: 20px 24px;
+  padding: 20px;
   box-shadow: var(--shadow);
 }
 
 header h1 {
   margin: 0;
-  font-size: 24px;
-  letter-spacing: 0.5px;
 }
 
-/* =========================
-   TABS NAVIGATION
-========================= */
+/* TABS */
 .tabs {
   display: flex;
-  gap: 12px;
-  padding: 16px 20px;
+  gap: 10px;
+  padding: 15px;
 }
 
 .tabs button {
-  padding: 10px 18px;
+  padding: 10px 16px;
   border: none;
   border-radius: 999px;
   background: white;
-  color: var(--secondary);
-  font-size: 14px;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  transition: all 0.25s ease;
-}
-
-.tabs button:hover {
-  transform: translateY(-2px);
+  transition: 0.2s;
 }
 
 .tabs button.active {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 10px rgba(37,99,235,0.35);
 }
 
-/* =========================
-   FORM CARD
-========================= */
+/* FORM */
 .form-card {
-  background: var(--surface);
-  margin: 0 20px 20px;
-  padding: 20px;
-  border-radius: 14px;
+  background: white;
+  margin: 0 15px 15px;
+  padding: 18px;
+  border-radius: 12px;
   box-shadow: var(--shadow);
-  animation: fadeIn 0.3s ease;
 }
 
-.form-card h3 {
-  margin-top: 0;
-  margin-bottom: 14px;
-  font-size: 18px;
-  color: var(--primary);
-}
-
-/* INPUT */
 .form-card input,
 .form-card textarea {
   width: 100%;
-  padding: 11px 12px;
+  padding: 10px;
   margin-bottom: 10px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 14px;
-  background: #f8fafc;
-  transition: 0.2s;
+  border-radius: 8px;
   box-sizing: border-box;
 }
 
-.form-card input:focus,
-.form-card textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: white;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-}
-
-/* TEXTAREA */
-.form-card textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-/* BUTTON */
 .form-card button {
-  padding: 11px 18px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 10px;
   background: var(--success);
   color: white;
-  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.form-card button:hover {
-  background: #15803d;
-  transform: translateY(-1px);
-}
-
-/* =========================
-   TABLE AREA
-========================= */
+/* TABLE */
 main {
-  margin: 0 20px 25px;
+  margin: 15px;
 }
 
-/* TABLE CARD LOOK */
 table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--surface);
-  border-radius: 14px;
-  overflow: hidden;
+  background: white;
   box-shadow: var(--shadow);
 }
 
-/* HEADER */
-th {
-  background: linear-gradient(90deg, #eff6ff, #f1f5f9);
-  color: #334155;
-  font-weight: 600;
-  text-align: left;
-  padding: 12px;
-  font-size: 14px;
-}
-
-/* ROW */
-td {
-  padding: 11px 12px;
+th, td {
+  padding: 10px;
   border-bottom: 1px solid var(--border);
-  font-size: 14px;
 }
 
-/* ROW HOVER */
-tr:hover td {
-  background: #f8fafc;
+th {
+  background: #f1f5f9;
 }
 
-/* =========================
-   BADGE STYLE (optional future)
-========================= */
-.badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #dbeafe;
-  color: var(--primary);
-  font-size: 12px;
-}
-
-/* =========================
-   UTILITIES
-========================= */
+/* UTIL */
 .hidden {
   display: none;
 }
 
 /* =========================
-   ANIMATION
+   TOAST ANIMATION
 ========================= */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--success);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: 0.3s;
+  z-index: 999;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-
-  .tabs {
-    flex-wrap: wrap;
-  }
-
-  main {
-    overflow-x: auto;
-  }
-
-  table {
-    min-width: 700px;
-  }
-
-  header h1 {
-    font-size: 20px;
-  }
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
 }
