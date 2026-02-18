@@ -1,4 +1,4 @@
-const API_URL = "ISI_DENGAN_URL_WEB_APP_APPS_SCRIPT";
+const API_URL = "https://script.google.com/macros/s/AKfycbyi1RJ0OkBorU09DGiDextAu1Si93VDxbMYvzUY6ktGgdfrK4LpH61ZBfzhC2knkHMg/exec";
 
 // LOAD DATA AWAL
 window.onload = function () {
