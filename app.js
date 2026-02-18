@@ -1,7 +1,7 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbwRIvKg9gwhuH5RXxp3LrGq5OeSiJTeDcDoT3OnGRTKaJIOgboa2XOujDnD2VUUBYbC/exec";
 
 // =====================
-// SHOW / HIDE FORM
+// SHOW FORM
 // =====================
 function showForm(type) {
   const formMasuk = document.getElementById("formMasuk");
@@ -13,27 +13,53 @@ function showForm(type) {
   if (type === "masuk") {
     formMasuk.classList.remove("hidden");
     formKeluar.classList.add("hidden");
-
     btnMasuk.classList.add("active");
     btnKeluar.classList.remove("active");
-
     loadData("surat_masuk");
   } else {
     formKeluar.classList.remove("hidden");
     formMasuk.classList.add("hidden");
-
     btnKeluar.classList.add("active");
     btnMasuk.classList.remove("active");
-
     loadData("surat_keluar");
   }
 }
 
-// default
 window.onload = () => showForm("masuk");
 
 // =====================
-// LOAD DATA
+// TOAST
+// =====================
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+
+  toast.classList.remove("hidden");
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.classList.add("hidden"), 300);
+  }, 2000);
+}
+
+// =====================
+// RESET FORM
+// =====================
+function resetForm(prefix) {
+  document.getElementById(`${prefix}_nomor`).value = "";
+  document.getElementById(`${prefix}_tanggal`).value = "";
+  document.getElementById(`${prefix}_perihal`).value = "";
+  document.getElementById(`${prefix}_catatan`).value = "";
+  document.getElementById(`${prefix}_file`).value = "";
+
+  if (prefix === "masuk") {
+    document.getElementById("masuk_pengirim").value = "";
+  } else {
+    document.getElementById("keluar_tujuan").value = "";
+  }
+}
+
 // =====================
 function loadData(type) {
   fetch(`${API_URL}?type=${type}`)
@@ -41,8 +67,6 @@ function loadData(type) {
     .then(renderTable);
 }
 
-// =====================
-// FILE → BASE64
 // =====================
 function toBase64(file) {
   return new Promise((resolve, reject) => {
@@ -56,7 +80,11 @@ function toBase64(file) {
 // =====================
 // SUBMIT SURAT MASUK
 // =====================
-async function submitSuratMasuk() {
+async function submitSuratMasuk(event) {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.textContent = "Mengirim...";
+
   const file = document.getElementById("masuk_file").files[0];
   const fileData = file ? await toBase64(file) : null;
 
@@ -71,13 +99,22 @@ async function submitSuratMasuk() {
     fileData
   };
 
-  submitData("surat_masuk", payload);
+  submitData("surat_masuk", payload, () => {
+    showToast("Surat masuk berhasil dikirim");
+    resetForm("masuk");
+    btn.disabled = false;
+    btn.textContent = "Simpan Surat Masuk";
+  });
 }
 
 // =====================
 // SUBMIT SURAT KELUAR
 // =====================
-async function submitSuratKeluar() {
+async function submitSuratKeluar(event) {
+  const btn = event.target;
+  btn.disabled = true;
+  btn.textContent = "Mengirim...";
+
   const file = document.getElementById("keluar_file").files[0];
   const fileData = file ? await toBase64(file) : null;
 
@@ -92,17 +129,25 @@ async function submitSuratKeluar() {
     fileData
   };
 
-  submitData("surat_keluar", payload);
+  submitData("surat_keluar", payload, () => {
+    showToast("Surat keluar berhasil dikirim");
+    resetForm("keluar");
+    btn.disabled = false;
+    btn.textContent = "Simpan Surat Keluar";
+  });
 }
 
 // =====================
-function submitData(type, payload) {
+function submitData(type, payload, callback) {
   fetch(API_URL, {
     method: "POST",
     body: JSON.stringify({ type, payload })
   })
     .then(res => res.json())
-    .then(renderTable);
+    .then(data => {
+      renderTable(data);
+      callback();
+    });
 }
 
 // =====================
