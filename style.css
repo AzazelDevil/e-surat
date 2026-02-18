@@ -1,5 +1,5 @@
 :root {
-  --bg: #f4f7fc;
+  --bg: #f5f7fb;
   --surface: #ffffff;
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
@@ -9,7 +9,9 @@
   --shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* GLOBAL */
+/* ======================
+   GLOBAL
+====================== */
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
@@ -17,7 +19,16 @@ body {
   color: var(--text);
 }
 
-/* HEADER */
+/* CONTAINER UTAMA (INI YANG MEMBUAT RAMPING) */
+.wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 14px 30px;
+}
+
+/* ======================
+   HEADER
+====================== */
 header {
   background: linear-gradient(120deg, var(--primary), var(--primary-dark));
   color: white;
@@ -27,22 +38,29 @@ header {
 
 header h1 {
   margin: 0;
+  font-size: 22px;
+  text-align: center;
 }
 
-/* TABS */
+/* ======================
+   TABS
+====================== */
 .tabs {
   display: flex;
+  justify-content: center;
   gap: 10px;
-  padding: 15px;
+  padding: 16px 0;
 }
 
 .tabs button {
-  padding: 10px 16px;
+  padding: 10px 18px;
   border: none;
   border-radius: 999px;
   background: white;
   cursor: pointer;
+  font-size: 14px;
   transition: 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
 .tabs button.active {
@@ -50,23 +68,48 @@ header h1 {
   color: white;
 }
 
-/* FORM */
+/* ======================
+   FORM CARD
+====================== */
 .form-card {
-  background: white;
-  margin: 0 15px 15px;
+  background: var(--surface);
   padding: 18px;
   border-radius: 12px;
   box-shadow: var(--shadow);
+  margin-bottom: 16px;
 }
 
+.form-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: var(--primary);
+}
+
+/* INPUT */
 .form-card input,
 .form-card textarea {
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   margin-bottom: 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
+  background: #f8fafc;
   box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.form-card input:focus,
+.form-card textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.form-card textarea {
+  min-height: 80px;
+  resize: vertical;
 }
 
 .form-card button {
@@ -76,37 +119,53 @@ header h1 {
   color: white;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-/* TABLE */
+.form-card button:hover {
+  transform: translateY(-1px);
+}
+
+/* ======================
+   TABLE AREA
+====================== */
 main {
-  margin: 15px;
+  margin-top: 12px;
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  box-shadow: var(--shadow);
-}
-
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid var(--border);
+  min-width: 680px;
 }
 
 th {
   background: #f1f5f9;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
 }
 
-/* UTIL */
-.hidden {
-  display: none;
+td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
 }
 
-/* =========================
-   TOAST ANIMATION
-========================= */
+tr:hover td {
+  background: #f8fafc;
+}
+
+/* ======================
+   TOAST
+====================== */
 .toast {
   position: fixed;
   top: 20px;
@@ -125,4 +184,27 @@ th {
 .toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+@media (max-width: 768px) {
+
+  .wrapper {
+    max-width: 100%;
+    padding: 0 10px 20px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  table {
+    min-width: 620px;
+  }
 }
